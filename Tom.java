@@ -2,6 +2,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Tom{
+    public enum Rooms{
+        LivingRoom,DinningRoom ,WashRoom
+    }
+    
     //attributes//
     int energyLevel;
     int steps;
@@ -13,15 +17,21 @@ public class Tom{
         this.steps=0;
         this.hasJerry=false;
         this.location = new ArrayList<Rooms>();
-        this.location = LivingRoom;
     }
 
     public void lookAround(){
-        if (this.location==LivingRoom){
-            
+        if (this.location == Rooms.LivingRoom){
+            System.out.println("You are in the living room. In the living room there are 2 soafs and 1 table ");}
+        else if (this.location== Rooms.WashRoom){
+            System.out.println("You are in the washroom");
+        
+        }else{
+
+        }System.out.println("You are in the kitchen ");
+
         }
 
-    }
+    
 
  
     public void go(){
