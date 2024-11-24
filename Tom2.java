@@ -2,15 +2,15 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Tom2 {
-    public enum Rooms {
-        LivingRoom, DiningRoom, WashRoom
-    }
+    //public enum Rooms {
+    //LivingRoom, DiningRoom, WashRoom
+    //}
 
     // Attributes
     int energyLevel;
     int steps;
     boolean hasJerry;
-    ArrayList<Rooms> location; // Map of rooms
+    ArrayList<Integer> location; // Map of rooms
     int currentIndex; // Tracks Tom's current position in the map
 
     // Constructor
@@ -18,13 +18,13 @@ public class Tom2 {
         this.energyLevel = 100;
         this.steps = 0;
         this.hasJerry = false;
-        this.location = new ArrayList<>();
+        this.location = new ArrayList<>(2);
         this.currentIndex = 0; // Start in the Living Room
 
         // Populate the map of rooms
-        this.location.add(Rooms.LivingRoom);
+        /*this.location.add(Rooms.LivingRoom);
         this.location.add(Rooms.DiningRoom);
-        this.location.add(Rooms.WashRoom);
+        this.location.add(Rooms.WashRoom);/* */
     }
 
     // Method to display the current room
