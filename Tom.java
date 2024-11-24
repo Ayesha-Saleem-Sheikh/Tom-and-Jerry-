@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Tom{
@@ -5,6 +6,7 @@ public class Tom{
     int energyLevel;
     int steps;
     boolean hasJerry;
+    ArrayList Location;
 
     public Tom(int energyLevel, int steps){
         this.energyLevel=100;
