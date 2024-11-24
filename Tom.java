@@ -6,16 +6,24 @@ public class Tom{
     int energyLevel;
     int steps;
     boolean hasJerry;
-    ArrayList Location;
+    ArrayList<Rooms> location;
 
-    public Tom(int energyLevel, int steps){
+    public Tom(){
         this.energyLevel=100;
         this.steps=0;
         this.hasJerry=false;
+        this.location = new ArrayList<Rooms>();
+        this.location = LivingRoom;
+    }
 
+    public void lookAround(){
+        if (this.location==LivingRoom){
+            
+        }
 
     }
-    
+
+ 
     public void go(){
         if (this.energyLevel>0){
             if (this.energyLevel<5){
@@ -52,10 +60,18 @@ public class Tom{
         energyLevel -=4;
         System.out.println("carefull when jumping!!");}
 
-    public void Lookaround(){
+    //public void Lookaround(){
+
+    //}
+
+    public static void main(String[] args) {
+        Tom tom= new Tom();
+    
+    }
+
 
     }
-    }
+
     
     
     
