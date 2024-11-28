@@ -2,12 +2,12 @@ import java.util.ArrayList;
 
 public class Tom3 {
     // Attributes
-      // Attributes
     int energyLevel;
     int steps;
     boolean hasJerry;
     ArrayList<String> location; // Map of rooms
     int currentIndex; // Tracks Tom's current position in the map
+    String direction;
 
     // Constructor
     public Tom3() {
@@ -16,6 +16,7 @@ public class Tom3 {
         this.hasJerry = false;
         this.location = new ArrayList<>(2);
         this.currentIndex = 0; // Start in the Living Room 
+        this.direction= "North";
 
         this.location.add("Living Room");
         this.location.add("Kitchen");
@@ -40,7 +41,7 @@ public class Tom3 {
         this.steps+=1;
         this.energyLevel-=2;
         if (this.steps==5){
-            System.out.println("Youare int the middle of the room!!");}
+            System.out.println("You are in the middle of the room!!");}
         else if(this.steps ==10){
             changeRoom();
         } 
@@ -52,17 +53,47 @@ public class Tom3 {
     
 
     public void goBackward(){
-        this.steps-=1;
+        this.steps+=1;
+        this.energyLevel-=2;
+        if (this.steps==5){
+            System.out.println("You are in the middle of the room!!");}
+        else if(this.steps ==10){
+            changeRoom();
+        } 
+        else {
+            goBackward();
+        }   
     }
 
-    /* public void goRight(){
-
+    public void goRight(){
+        // Change direction when turning right
+        if (this.direction.equals("NORTH")) {
+            this.direction = "EAST";
+        } else if (this.direction.equals("EAST")) {
+            this.direction = "SOUTH";
+        } else if (this.direction.equals("SOUTH")) {
+            this.direction = "WEST";
+        } else if (this.direction.equals("WEST")) {
+            this.direction = "NORTH";
+        }
+        System.out.println("Tom turned right. Now facing: " + this.direction);
+    
     }
 
     public void goLeft(){
+        // Change direction when turning left
+        if (this.direction.equals("NORTH")) {
+        this.direction = "WEST";
+        } else if (this.direction.equals("WEST")) {
+        this.direction = "SOUTH";
+        } else if (this.direction.equals("SOUTH")) {
+        this.direction = "EAST";
+        } else if (this.direction.equals("EAST")) {
+        this.direction = "NORTH";
+        }
+        System.out.println("Tom turned left. Now facing: " + this.direction);
+    }
 
-    
-    }*/
 
     public static void main(String[] args) {
         Tom3 tom = new Tom3();
@@ -70,6 +101,5 @@ public class Tom3 {
         tom.changeRoom();*/
         tom.goForward();
         tom.goForward();
-
     }
 }
