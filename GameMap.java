@@ -1,29 +1,88 @@
-import com.google.common.collect.HashBasedTable;
-import com.google.common.collect.Table;
-
 public class GameMap {
-    private Table<Integer, Integer, String> roomMap;
+    private final int GRID_SIZE = 20; // 20x20 grid
+    private String[][] grid; // To represent the grid
+    private int tomX, tomY; // Tom's current position
 
+    // Constructor
     public GameMap() {
-        roomMap = HashBasedTable.create();
+        grid = new String[GRID_SIZE][GRID_SIZE];
         initializeRooms();
+        tomX = 5; // Starting position (in the middle of the Living Room)
+        tomY = 5;
     }
 
-    // Initialize the 2D map with room names
+    // Define the rooms on the grid
     private void initializeRooms() {
-        roomMap.put(1, 1, "Living Room");
-        roomMap.put(2, 1, "Kitchen");
-        roomMap.put(1, 2, "Bedroom");
-        roomMap.put(2, 2, "Bathroom");
+        // Living Room
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                grid[i][j] = "Living Room";
+            }
+        }
+
+        // Kitchen
+        for (int i = 10; i < 20; i++) {
+            for (int j = 0; j < 10; j++) {
+                grid[i][j] = "Kitchen";
+            }
+        }
+
+        // Bedroom
+        for (int i = 0; i < 10; i++) {
+            for (int j = 10; j < 20; j++) {
+                grid[i][j] = "Bedroom";
+            }
+        }
+
+        // Bathroom
+        for (int i = 10; i < 20; i++) {
+            for (int j = 10; j < 20; j++) {
+                grid[i][j] = "Bathroom";
+            }
+        }
     }
 
-    // Get room name by coordinates
-    public String getRoom(int x, int y) {
-        return roomMap.get(x, y);
+    // Get Tom's current room
+    public String getCurrentRoom() {
+        return grid[tomX][tomY];
     }
 
-    // Check if a room exists at given coordinates
-    public boolean isRoomAvailable(int x, int y) {
-        return roomMap.contains(x, y);
+    // Move Tom by one step
+    public boolean moveTom(String direction) {
+        int newX = tomX;
+        int newY = tomY;
+
+        switch (direction.toLowerCase()) {
+            case "north":
+                newY -= 1; // Move up
+                break;
+            case "south":
+                newY += 1; // Move down
+                break;
+            case "east":
+                newX += 1; // Move right
+                break;
+            case "west":
+                newX -= 1; // Move left
+                break;
+            default:
+                System.out.println("Invalid direction. Use 'north', 'south', 'east', or 'west'.");
+                return false;
+        }
+
+        // Check if the new position is within bounds
+        if (newX >= 0 && newX < GRID_SIZE && newY >= 0 && newY < GRID_SIZE) {
+            tomX = newX;
+            tomY = newY;
+            return true;
+        } else {
+            System.out.println("Tom can't move outside the house!");
+            return false;
+        }
+    }
+
+    // Get Tom's current position
+    public String getPosition() {
+        return "(" + tomX + ", " + tomY + ")";
     }
 }

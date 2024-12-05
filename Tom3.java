@@ -1,39 +1,26 @@
-import java.util.ArrayList;
-
 public class Tom3 {
     // Attributes
     int energyLevel;
     int steps;
     boolean hasJerry;
-    ArrayList<String> location; // Map of rooms
-    int currentIndex; // Tracks Tom's current position in the map
-    String direction; //Track's Tom's direction
+    int currentX; // Tom's current X-coordinate
+    int currentY; // Tom's current Y-coordinate
+    String direction; // Tracks Tom's direction
+    GameMap gameMap; // Reference to the GameMap
 
     // Constructor
     public Tom3() {
         this.energyLevel = 100;
         this.steps = 0;
         this.hasJerry = false;
-        this.location = new ArrayList<>(2);
-        this.currentIndex = 0; // Start in the Living Room
-        this.direction="North"; //Initial direction
-
-        this.location.add("Living Room");
-        this.location.add("Kitchen");
-        //this.location.add("washroom");
-        }
+        this.currentX = 1; // Start at Living Room (1,1)
+        this.currentY = 1;
+        this.direction = "NORTH";
+        this.gameMap = new GameMap(); // Initialize GameMap
+        System.out.println("Tom starts in the " + gameMap.getRoom(currentX, currentY));
+    }
 
     public void changeRoom(){
-        if (this.currentIndex== 0){
-            currentIndex += 1;
-            System.out.println("Tom is now in the " + this.location.get(currentIndex));
-        }else if (this.currentIndex==1){
-            currentIndex -=1;
-            System.out.println("Tom is now in the " + this.location.get(currentIndex));
-
-        }else{
-            throw new RuntimeException("Tom is outside the hosue");
-        }
 
     }
 
@@ -95,3 +82,4 @@ public class Tom3 {
 
     }
 }
+
