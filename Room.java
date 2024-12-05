@@ -5,7 +5,7 @@ public class Room {
     public Room(String name, int serial){
         this.name=name;
         this.serial=serial;
-    } 
+    }
 
     public String toString(){
         return name +"("+serial+")";

@@ -2,7 +2,6 @@ import java.util.ArrayList;
 
 public class Tom3 {
     // Attributes
-      // Attributes
     int energyLevel;
     int steps;
     boolean hasJerry;
