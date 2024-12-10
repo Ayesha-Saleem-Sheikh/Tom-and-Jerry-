@@ -88,6 +88,8 @@ public class Tom3 {
 
         tom.moveTom("west");
         tom.displayStatus();
+        tom.moveTom("north");
+
     }
 }
 
