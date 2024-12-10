@@ -1,10 +1,10 @@
-public class GameMap {
+public class design {
     private final int GRID_SIZE = 20; // 20x20 grid
     private String[][] grid; // To represent the grid
     private int tomX, tomY; // Tom's current position
 
     // Constructor
-    public GameMap() {
+    public design() {
         grid = new String[GRID_SIZE][GRID_SIZE];
         initializeRoomsAndObjects();
         tomX = 5; // Starting position (in the middle of the Living Room)
