@@ -4,7 +4,7 @@ public class Game {
 
     public Game() {
         gameMap = new Design();
-        tom = new Tom3();
+        tom = new Tom3(gameMap);
     }
 
     public void startGame() {
