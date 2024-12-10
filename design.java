@@ -12,23 +12,54 @@ public class Design {
     }
 
     // Define the rooms, walls, doors, and objects on the grid
-    private void initializeRoomsAndObjects() {
-        // Initialize all cells as "Empty"
-        for (int i = 0; i < GRID_SIZE; i++) {
-            for (int j = 0; j < GRID_SIZE; j++) {
-                grid[i][j] = "Empty";
-            }
+ // Adjust the Design class initializeRoomsAndObjects method
+private void initializeRoomsAndObjects() {
+    // Define rooms, walls, and doors as per the map
+    for (int i = 0; i < GRID_SIZE; i++) {
+        for (int j = 0; j < GRID_SIZE; j++) {
+            grid[i][j] = "Empty";
         }
+    }
 
-        // Add walls based on the provided map
-        for (int i = 0; i < GRID_SIZE; i++) {
-            for (int j = 0; j < GRID_SIZE; j++) {
-                if (i == 0 || j == 0 || i == GRID_SIZE - 1 || j == GRID_SIZE - 1) {
-                    grid[i][j] = "Wall"; // Outer boundary walls
-                }
-            }
+    // Walls around the grid
+    for (int i = 0; i < GRID_SIZE; i++) {
+        grid[0][i] = "Wall";
+        grid[GRID_SIZE - 1][i] = "Wall";
+        grid[i][0] = "Wall";
+        grid[i][GRID_SIZE - 1] = "Wall";
+    }
+
+    // Define specific rooms
+    defineRoom(1, 1, 8, 8, "Living Room");
+    defineRoom(1, 10, 8, 18, "Bedroom");
+    defineRoom(11, 1, 16, 8, "Kitchen");
+    defineRoom(11, 11, 16, 18, "Bathroom");
+
+    // Define doors (2 cells long)
+    defineDoor(4, 9, 5, 9); // Living Room <-> Bedroom
+    defineDoor(12, 9, 13, 9); // Kitchen <-> Bathroom
+    defineDoor(9, 6, 9, 7); // Living Room <-> Kitchen
+    defineDoor(9, 14, 9, 15); // Bedroom <-> Bathroom
+}
+
+// Helper to define a room
+private void defineRoom(int startX, int startY, int endX, int endY, String roomName) {
+    for (int i = startX; i <= endX; i++) {
+        for (int j = startY; j <= endY; j++) {
+            grid[i][j] = roomName;
         }
-        // Add walls, doors, and rooms based on the map image
+    }
+}
+
+// Helper to define a door
+private void defineDoor(int startX, int startY, int endX, int endY) {
+    for (int i = startX; i <= endX; i++) {
+        for (int j = startY; j <= endY; j++) {
+            grid[i][j] = "Door";
+        }
+    }
+}
+
         // Living Room
         for (int i = 1; i <= 8; i++) {
             for (int j = 1; j <= 8; j++) {
