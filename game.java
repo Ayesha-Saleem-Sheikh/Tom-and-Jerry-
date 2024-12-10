@@ -1,10 +1,10 @@
 public class game{
     private Tom3 tom; // Tom object
-    private design gameMap; // Map object
+    private Design gameMap; // Map object
 
     // Constructor
     public game() {
-        gameMap = new design(); // Initialize the map
+        gameMap = new Design(); // Initialize the map
         tom = new Tom3(); // Initialize Tom
     }
 
