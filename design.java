@@ -1,19 +1,19 @@
-public class design{
+public class GameMap {
     private final int GRID_SIZE = 20; // 20x20 grid
     private String[][] grid; // To represent the grid
     private int tomX, tomY; // Tom's current position
 
     // Constructor
-    public design() {
+    public GameMap() {
         grid = new String[GRID_SIZE][GRID_SIZE];
-        initializeRooms();
+        initializeRoomsAndObjects();
         tomX = 5; // Starting position (in the middle of the Living Room)
         tomY = 5;
     }
 
-    // Define the rooms and objects on the grid based on the map
-    private void initializeRooms() {
-        // Fill the grid with empty spaces
+    // Define the rooms and objects on the grid
+    private void initializeRoomsAndObjects() {
+        // Initialize all cells as empty
         for (int i = 0; i < GRID_SIZE; i++) {
             for (int j = 0; j < GRID_SIZE; j++) {
                 grid[i][j] = "Empty";
@@ -21,48 +21,80 @@ public class design{
         }
 
         // Living Room
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
                 grid[i][j] = "Living Room";
             }
         }
-        // Adding objects in the Living Room
-        grid[2][3] = "Chair";  // Chair at (2, 3)
-        grid[4][5] = "Table";  // Table at (4, 5)
+        // Add Living Room objects
+        for (int i = 1; i <= 3; i++) {
+            for (int j = 1; j <= 4; j++) {
+                grid[i][j] = "Sofa";
+            }
+        }
+        for (int i = 4; i <= 5; i++) {
+            for (int j = 4; j <= 6; j++) {
+                grid[i][j] = "Table";
+            }
+        }
 
         // Kitchen
-        for (int i = 10; i < 20; i++) {
-            for (int j = 0; j < 10; j++) {
+        for (int i = 10; i < 14; i++) {
+            for (int j = 0; j < 7; j++) {
                 grid[i][j] = "Kitchen";
             }
         }
-        // Adding objects in the Kitchen
-        grid[12][5] = "Fridge";  // Fridge at (12, 5)
-        grid[14][7] = "Oven";    // Oven at (14, 7)
+        // Add Kitchen objects
+        for (int i = 11; i <= 12; i++) {
+            for (int j = 1; j <= 2; j++) {
+                grid[i][j] = "Fridge";
+            }
+        }
+        for (int i = 12; i <= 13; i++) {
+            for (int j = 4; j <= 5; j++) {
+                grid[i][j] = "Stove";
+            }
+        }
 
         // Bedroom
-        for (int i = 0; i < 10; i++) {
-            for (int j = 10; j < 20; j++) {
+        for (int i = 1; i < 9; i++) {
+            for (int j = 10; j < 17; j++) {
                 grid[i][j] = "Bedroom";
             }
         }
-        // Adding objects in the Bedroom
-        grid[6][12] = "Bed";     // Bed at (6, 12)
-        grid[7][14] = "Closet";  // Closet at (7, 14)
+        // Add Bedroom objects
+        for (int i = 2; i <= 4; i++) {
+            for (int j = 11; j <= 14; j++) {
+                grid[i][j] = "Bed";
+            }
+        }
+        for (int i = 5; i <= 6; i++) {
+            for (int j = 15; j <= 16; j++) {
+                grid[i][j] = "Wardrobe";
+            }
+        }
 
         // Bathroom
-        for (int i = 10; i < 20; i++) {
-            for (int j = 10; j < 20; j++) {
+        for (int i = 11; i < 17; i++) {
+            for (int j = 12; j < 17; j++) {
                 grid[i][j] = "Bathroom";
             }
         }
-        // Adding objects in the Bathroom
-        grid[13][12] = "Shower"; // Shower at (13, 12)
-        grid[15][14] = "Sink";   // Sink at (15, 14)
+        // Add Bathroom objects
+        for (int i = 13; i <= 14; i++) {
+            for (int j = 13; j <= 14; j++) {
+                grid[i][j] = "Sink";
+            }
+        }
+        for (int i = 15; i <= 16; i++) {
+            for (int j = 14; j <= 15; j++) {
+                grid[i][j] = "Toilet";
+            }
+        }
     }
 
     // Get Tom's current room or object
-    public String getCurrentRoom() {
+    public String getCurrentRoomOrObject() {
         return grid[tomX][tomY];
     }
 
