@@ -42,47 +42,17 @@ public class GameMap {
         }
     }
 
+    // Get the room name at specific coordinates
+    public String getRoom(int x, int y) {
+        if (x >= 0 && x < GRID_SIZE && y >= 0 && y < GRID_SIZE) {
+            return grid[x][y];
+        } else {
+            return "You are out of the house.";
+        }
+    }
+
     // Get Tom's current room
     public String getCurrentRoom() {
         return grid[tomX][tomY];
-    }
-
-    // Move Tom by one step
-    public boolean moveTom(String direction) {
-        int newX = tomX;
-        int newY = tomY;
-
-        switch (direction.toLowerCase()) {
-            case "north":
-                newY -= 1; // Move up
-                break;
-            case "south":
-                newY += 1; // Move down
-                break;
-            case "east":
-                newX += 1; // Move right
-                break;
-            case "west":
-                newX -= 1; // Move left
-                break;
-            default:
-                System.out.println("Invalid direction. Use 'north', 'south', 'east', or 'west'.");
-                return false;
-        }
-
-        // Check if the new position is within bounds
-        if (newX >= 0 && newX < GRID_SIZE && newY >= 0 && newY < GRID_SIZE) {
-            tomX = newX;
-            tomY = newY;
-            return true;
-        } else {
-            System.out.println("Tom can't move outside the house!");
-            return false;
-        }
-    }
-
-    // Get Tom's current position
-    public String getPosition() {
-        return "(" + tomX + ", " + tomY + ")";
     }
 }
