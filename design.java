@@ -7,107 +7,65 @@ public class Design {
     public Design() {
         grid = new String[GRID_SIZE][GRID_SIZE];
         initializeRoomsAndObjects();
-        tomX = 3; // Starting position (in the middle of the Living Room)
-        tomY = 0;
+        tomX = 6; // Starting position (as per map)
+        tomY = 1;
     }
 
     // Define the rooms, walls, doors, and objects on the grid
     private void initializeRoomsAndObjects() {
-        // Initialize all cells as empty
+        // Initialize all cells as "Empty"
         for (int i = 0; i < GRID_SIZE; i++) {
             for (int j = 0; j < GRID_SIZE; j++) {
                 grid[i][j] = "Empty";
             }
         }
 
-        // Add walls
+        // Add walls based on the provided map
         for (int i = 0; i < GRID_SIZE; i++) {
-            grid[i][9] = "Wall"; // Vertical wall separating left and right
-            grid[9][i] = "Wall"; // Horizontal wall separating top and bottom
+            for (int j = 0; j < GRID_SIZE; j++) {
+                if (i == 0 || j == 0 || i == GRID_SIZE - 1 || j == GRID_SIZE - 1) {
+                    grid[i][j] = "Wall"; // Outer boundary walls
+                }
+            }
         }
-
-        // Add doors to walls
-        grid[4][9] = "Door"; // Door between Living Room and Bedroom
-        grid[12][9] = "Door"; // Door between Kitchen and Bathroom
-        grid[9][6] = "Door"; // Door between Living Room and Kitchen
-        grid[9][14] = "Door"; // Door between Bedroom and Bathroom
-
+        // Add walls, doors, and rooms based on the map image
         // Living Room
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
+        for (int i = 1; i <= 8; i++) {
+            for (int j = 1; j <= 8; j++) {
                 grid[i][j] = "Living Room";
-            }
-        }
-        // Add Living Room objects
-        for (int i = 1; i <= 3; i++) {
-            for (int j = 1; j <= 4; j++) {
-                grid[i][j] = "Sofa";
-            }
-        }
-        for (int i = 4; i <= 5; i++) {
-            for (int j = 4; j <= 6; j++) {
-                grid[i][j] = "Table";
-            }
-        }
-
-        // Kitchen
-        for (int i = 10; i < 14; i++) {
-            for (int j = 0; j < 7; j++) {
-                grid[i][j] = "Kitchen";
-            }
-        }
-        // Add Kitchen objects
-        for (int i = 11; i <= 12; i++) {
-            for (int j = 1; j <= 2; j++) {
-                grid[i][j] = "Fridge";
-            }
-        }
-        for (int i = 12; i <= 13; i++) {
-            for (int j = 4; j <= 5; j++) {
-                grid[i][j] = "Stove";
             }
         }
 
         // Bedroom
-        for (int i = 1; i < 9; i++) {
-            for (int j = 10; j < 17; j++) {
+        for (int i = 1; i <= 8; i++) {
+            for (int j = 10; j <= 18; j++) {
                 grid[i][j] = "Bedroom";
             }
         }
-        // Add Bedroom objects
-        for (int i = 2; i <= 4; i++) {
-            for (int j = 11; j <= 14; j++) {
-                grid[i][j] = "Bed";
-            }
-        }
-        for (int i = 5; i <= 6; i++) {
-            for (int j = 15; j <= 16; j++) {
-                grid[i][j] = "Wardrobe";
+
+        // Kitchen
+        for (int i = 11; i <= 16; i++) {
+            for (int j = 1; j <= 8; j++) {
+                grid[i][j] = "Kitchen";
             }
         }
 
         // Bathroom
-        for (int i = 11; i < 17; i++) {
-            for (int j = 12; j < 17; j++) {
+        for (int i = 11; i <= 16; i++) {
+            for (int j = 11; j <= 18; j++) {
                 grid[i][j] = "Bathroom";
             }
         }
-        // Add Bathroom objects
-        for (int i = 13; i <= 14; i++) {
-            for (int j = 13; j <= 14; j++) {
-                grid[i][j] = "Sink";
-            }
-        }
-        for (int i = 15; i <= 16; i++) {
-            for (int j = 14; j <= 15; j++) {
-                grid[i][j] = "Toilet";
-            }
-        }
-    }
 
-    // Get Tom's current room or object
-    public String getCurrentRoomOrObject() {
-        return grid[tomX][tomY];
+        // Add walls inside rooms
+        grid[9][1] = "Wall"; grid[9][2] = "Wall";
+        // More wall coordinates...
+
+        // Add doors
+        grid[4][9] = "Door"; // Living Room <-> Bedroom
+        grid[12][9] = "Door"; // Kitchen <-> Bathroom
+        grid[9][6] = "Door"; // Living Room <-> Kitchen
+        grid[9][14] = "Door"; // Bedroom <-> Bathroom
     }
 
     // Move Tom by one step
@@ -117,16 +75,16 @@ public class Design {
 
         switch (direction.toLowerCase()) {
             case "north":
-                newY -= 1; // Move up
+                newY -= 1;
                 break;
             case "south":
-                newY += 1; // Move down
+                newY += 1;
                 break;
             case "east":
-                newX += 1; // Move right
+                newX += 1;
                 break;
             case "west":
-                newX -= 1; // Move left
+                newX -= 1;
                 break;
             default:
                 System.out.println("Invalid direction. Use 'north', 'south', 'east', or 'west'.");
@@ -134,13 +92,16 @@ public class Design {
         }
 
         // Check if the new position is within bounds and not a wall
-        if (newX >= 0 && newX < GRID_SIZE && newY >= 0 && newY < GRID_SIZE && !grid[newY][newX].equals("Wall")) {
-            tomX = newX;
-            tomY = newY;
-            return true;
-        } else if (grid[newY][newX].equals("Wall")) {
-            System.out.println("Tom can't move there! It's blocked by a wall.");
-            return false;
+        if (newX >= 0 && newX < GRID_SIZE && newY >= 0 && newY < GRID_SIZE) {
+            if (grid[newY][newX].equals("Wall")) {
+                System.out.println("Tom can't move there! It's blocked by a wall.");
+                return false;
+            } else {
+                tomX = newX;
+                tomY = newY;
+                System.out.println("Tom moved to " + getPosition() + " in " + getCurrentRoomOrObject());
+                return true;
+            }
         } else {
             System.out.println("Tom can't move outside the house!");
             return false;
@@ -150,5 +111,10 @@ public class Design {
     // Get Tom's current position
     public String getPosition() {
         return "(" + tomX + ", " + tomY + ")";
+    }
+
+    // Get Tom's current room or object
+    public String getCurrentRoomOrObject() {
+        return grid[tomY][tomX];
     }
 }

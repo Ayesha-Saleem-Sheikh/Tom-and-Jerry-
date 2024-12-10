@@ -1,17 +1,16 @@
-public class game{
-    private Tom3 tom; // Tom object
-    private Design gameMap; // Map object
+public class Game {
+    private Tom3 tom;
+    private Design gameMap;
 
-    // Constructor
-    public game() {
-        gameMap = new Design(); // Initialize the map
-        tom = new Tom3(); // Initialize Tom
+    public Game() {
+        gameMap = new Design();
+        tom = new Tom3();
     }
 
-    // Main game loop
     public void startGame() {
         java.util.Scanner scanner = new java.util.Scanner(System.in);
-        System.out.println("Welcome to Tom's Adventure! Type 'north', 'south', 'east', or 'west' to move.");
+        System.out.println("Welcome to Tom's Adventure!");
+        System.out.println("Type 'north', 'south', 'east', or 'west' to move.");
         System.out.println("Type 'status' to view Tom's current status or 'exit' to quit.");
 
         while (true) {
@@ -23,22 +22,15 @@ public class game{
                 break;
             } else if (command.equals("status")) {
                 tom.displayStatus();
-                System.out.println("Current Room/Object: " + gameMap.getCurrentRoomOrObject());
             } else {
-                boolean moved = gameMap.moveTom(command);
-                if (moved) {
-                    tom.moveTom(command);
-                } else {
-                    System.out.println("Move failed. Try another direction.");
-                }
+                tom.moveTom(command);
             }
         }
         scanner.close();
     }
 
     public static void main(String[] args) {
-        game game = new game();
+        Game game = new Game();
         game.startGame();
     }
 }
- 
